@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IMDb Sentiment Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>IMDb Sentiment Analysis</h1>
+
+        <form method="POST">
+            <textarea name="text" rows="6" placeholder="Enter your review here...">{{ text }}</textarea><br><br>
+            <button type="submit">Analyze</button>
+        </form>
+
+        {% if sentiment %}
+            {% if sentiment == "Model not available" or sentiment == "Prediction error" or sentiment == "No input provided" %}
+                <div class="error">
+                    <p>{{ sentiment }}</p>
+                </div>
+            {% else %}
+                <div class="result">
+                    <h2>Sentiment: {{ sentiment | capitalize }}</h2>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
